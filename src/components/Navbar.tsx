@@ -31,6 +31,7 @@ export default function Navbar() {
           MedAdvise AI
         </Link>
         <div className="navbar-links">
+          <Link href="/metrics">Metrics</Link>
           {loggedIn ? (
             <>
               <Link href="/consultations">Consultations</Link>
