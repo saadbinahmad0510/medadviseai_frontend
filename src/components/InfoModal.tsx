@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useCallback, useState } from 'react';
+import { MicroscopeIcon, XMarkIcon, ExclamationTriangleIcon, CheckCircleIcon, BoltIcon, ShieldCheckIcon } from '@/components/Icons';
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Cell } from 'recharts';
 import {
   Consultation,
@@ -152,10 +153,12 @@ export default function InfoModal({ consultation, isOpen, onClose }: InfoModalPr
         {/* Header */}
         <div className="info-modal-header">
           <div className="info-modal-title">
-            <span style={{ fontSize: '1.25rem' }}>🔬</span>
+            <MicroscopeIcon size={20} color="var(--color-primary)" />
             Detailed Analysis — {GRADE_LABELS[grade]}
           </div>
-          <button className="info-modal-close" onClick={onClose} aria-label="Close">✕</button>
+          <button className="info-modal-close" onClick={onClose} aria-label="Close">
+            <XMarkIcon size={16} />
+          </button>
         </div>
 
         {/* Tabs */}
@@ -187,11 +190,17 @@ export default function InfoModal({ consultation, isOpen, onClose }: InfoModalPr
                     color: isOA ? '#b91c1c' : '#15803d',
                   }}
                 >
-                  {isOA ? '⚠️ Osteoarthritis Detected' : '✅ No Osteoarthritis Detected'}
+                  <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem' }}>
+                    {isOA
+                      ? <ExclamationTriangleIcon size={15} />
+                      : <CheckCircleIcon size={15} />}
+                    {isOA ? 'Osteoarthritis Detected' : 'No Osteoarthritis Detected'}
+                  </span>
                 </span>
                 {lowReliability && (
-                  <span style={{ padding: '0.4rem 1rem', borderRadius: '999px', fontWeight: 600, fontSize: '0.85rem', background: '#fff7ed', color: '#9a3412' }}>
-                    ⚡ Lower Reliability
+                  <span style={{ padding: '0.4rem 1rem', borderRadius: '999px', fontWeight: 600, fontSize: '0.85rem', background: '#fff7ed', color: '#9a3412', display: 'inline-flex', alignItems: 'center', gap: '0.4rem' }}>
+                    <BoltIcon size={14} />
+                    Lower Reliability
                   </span>
                 )}
               </div>
@@ -225,9 +234,10 @@ export default function InfoModal({ consultation, isOpen, onClose }: InfoModalPr
                 <div style={{ color: 'var(--color-text-muted)', fontSize: '0.9rem', lineHeight: 1.6 }}>{KL_DEFINITIONS[grade]}</div>
               </div>
               {lowReliability && (
-                <div style={{ background: '#fff7ed', border: '1px solid #fed7aa', borderRadius: '8px', padding: '0.75rem 1rem', fontSize: '0.85rem', color: '#9a3412' }}>
-                  ⚠️ <strong>Lower reliability warning:</strong> Grades 1 and 2 are the most challenging for the model to distinguish.
-                  Grade 1 F1 score = 0.39, Grade 2 F1 = 0.47. Treat this result with caution and confirm with a specialist.
+                <div style={{ background: '#fff7ed', border: '1px solid #fed7aa', borderRadius: '8px', padding: '0.75rem 1rem', fontSize: '0.85rem', color: '#9a3412', display: 'flex', gap: '0.6rem', alignItems: 'flex-start' }}>
+                  <ExclamationTriangleIcon size={16} style={{ flexShrink: 0, marginTop: '0.1rem' }} />
+                  <span><strong>Lower reliability warning:</strong> Grades 1 and 2 are the most challenging for the model to distinguish.
+                  Grade 1 F1 score = 0.39, Grade 2 F1 = 0.47. Treat this result with caution and confirm with a specialist.</span>
                 </div>
               )}
             </div>
@@ -309,8 +319,9 @@ export default function InfoModal({ consultation, isOpen, onClose }: InfoModalPr
                   {grade === 4 && 'Large osteophytes. Marked joint space narrowing. Severe sclerosis. Definite bony deformity.'}
                 </div>
               </div>
-              <div style={{ background: '#fef2f2', border: '1px solid #fecaca', borderRadius: '8px', padding: '0.75rem 1rem', fontSize: '0.85rem', color: '#7f1d1d' }}>
-                ⚕️ <strong>Disclaimer:</strong> This is a research prototype only. All clinical decisions must be made by a qualified orthopedic specialist based on full clinical assessment.
+              <div style={{ background: '#fef2f2', border: '1px solid #fecaca', borderRadius: '8px', padding: '0.75rem 1rem', fontSize: '0.85rem', color: '#7f1d1d', display: 'flex', gap: '0.6rem', alignItems: 'flex-start' }}>
+                <ShieldCheckIcon size={16} style={{ flexShrink: 0, marginTop: '0.1rem' }} />
+                <span><strong>Disclaimer:</strong> This is a research prototype only. All clinical decisions must be made by a qualified orthopedic specialist based on full clinical assessment.</span>
               </div>
             </div>
           )}
@@ -333,9 +344,10 @@ export default function InfoModal({ consultation, isOpen, onClose }: InfoModalPr
                   <tr><td>Ensemble Models</td><td>DenseNet201, EfficientNetV2S, MobileNetV2, Xception</td></tr>
                 </tbody>
               </table>
-              <div style={{ background: '#fff7ed', border: '1px solid #fed7aa', borderRadius: '8px', padding: '0.75rem 1rem', marginTop: '1rem', fontSize: '0.85rem', color: '#9a3412' }}>
-                ⚠️ <strong>Research prototype only.</strong> Not validated for clinical use. Not a medical device.
-                Grade 1 reliability is especially low (F1 = 0.39). Always confirm with a qualified radiologist or orthopedic specialist.
+              <div style={{ background: '#fff7ed', border: '1px solid #fed7aa', borderRadius: '8px', padding: '0.75rem 1rem', marginTop: '1rem', fontSize: '0.85rem', color: '#9a3412', display: 'flex', gap: '0.6rem', alignItems: 'flex-start' }}>
+                <ExclamationTriangleIcon size={16} style={{ flexShrink: 0, marginTop: '0.1rem' }} />
+                <span><strong>Research prototype only.</strong> Not validated for clinical use. Not a medical device.
+                Grade 1 reliability is especially low (F1 = 0.39). Always confirm with a qualified radiologist or orthopedic specialist.</span>
               </div>
             </div>
           )}

@@ -16,6 +16,7 @@ import InfoModal from '@/components/InfoModal';
 import FloatingChatbot from '@/components/FloatingChatbot';
 import { MOCK_CONSULTATIONS } from '@/lib/mockData';
 import { GRADE_LABELS, KLGrade } from '@/types/consultation';
+import { StethoscopeIcon, XRayIcon, ChatBubbleIcon, LogoutIcon } from '@/components/Icons';
 
 function formatConsultationContext(c: Consultation): string {
   const parts: string[] = [];
@@ -87,8 +88,8 @@ export default function ConsultationsPage() {
       <div className="chat-layout">
         <aside className="chat-sidebar">
           <div className="chat-sidebar-header">
-            <div style={{ color: '#ececf1', fontWeight: 700, fontSize: '0.85rem', padding: '0.25rem 0.5rem 0.75rem', borderBottom: '1px solid #4d4d4f', marginBottom: '0.5rem' }}>
-              🩺 MedAdvise AI
+            <div style={{ color: '#ececf1', fontWeight: 700, fontSize: '0.85rem', padding: '0.25rem 0.5rem 0.75rem', borderBottom: '1px solid #4d4d4f', marginBottom: '0.5rem', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+              <StethoscopeIcon size={16} color="#ececf1" /> MedAdvise AI
             </div>
             <button className="new-chat-btn" onClick={handleNewChat}>+ New consultation</button>
           </div>
@@ -108,7 +109,7 @@ export default function ConsultationsPage() {
                     onClick={() => setSelectedId(c.id)}
                     title={label}
                   >
-                    <span>{c.image ? '🩻' : '💬'}</span>
+                    <span>{c.image ? <XRayIcon size={14} /> : <ChatBubbleIcon size={14} />}</span>
                     {' '}{label}{gradeLabel}
                   </button>
                 );
@@ -116,7 +117,7 @@ export default function ConsultationsPage() {
             )}
           </div>
           <div className="chat-sidebar-footer">
-            <button onClick={handleLogout}>🚪 Log out</button>
+            <button onClick={handleLogout} style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}><LogoutIcon size={14} /> Log out</button>
           </div>
         </aside>
 
@@ -151,7 +152,7 @@ export default function ConsultationsPage() {
           ) : (
             <div className="chat-empty">
               <div>
-                <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>🩺</div>
+                <div style={{ fontSize: '3rem', marginBottom: '1rem' }}><StethoscopeIcon size={48} color="var(--color-primary)" /></div>
                 <h1>MedAdvise AI</h1>
                 <p className="subtitle">Upload a knee X-ray or describe your symptoms to start a consultation.</p>
               </div>

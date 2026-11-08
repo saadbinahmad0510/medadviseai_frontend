@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { chatWithGemini, GeminiMessage } from '@/lib/gemini';
 import { sendChatMessage } from '@/lib/api';
+import { CpuChipIcon, ChatBubbleIcon, XMarkIcon, PaperAirplaneIcon } from '@/components/Icons';
 
 interface FloatingChatbotProps {
   consultationContext?: string;
@@ -83,9 +84,12 @@ export default function FloatingChatbot({ consultationContext, consultationId }:
         <div className="floating-chat-panel">
           <div className="floating-chat-header">
             <div className="floating-chat-header-title">
-              🤖 MedAdvise AI Assistant
+              <CpuChipIcon size={18} color="white" />
+              MedAdvise AI Assistant
             </div>
-            <button className="floating-chat-header-close" onClick={() => setIsOpen(false)}>✕</button>
+            <button className="floating-chat-header-close" onClick={() => setIsOpen(false)} aria-label="Close chat">
+              <XMarkIcon size={16} color="white" />
+            </button>
           </div>
 
           <div className="floating-chat-messages">
@@ -126,7 +130,7 @@ export default function FloatingChatbot({ consultationContext, consultationId }:
               disabled={loading || !input.trim()}
               aria-label="Send"
             >
-              ➤
+              <PaperAirplaneIcon size={16} color="white" />
             </button>
           </div>
           <div className="floating-chat-powered">
@@ -136,7 +140,7 @@ export default function FloatingChatbot({ consultationContext, consultationId }:
       )}
 
       <button className="floating-chat-btn" onClick={() => setIsOpen((o) => !o)} aria-label="Open AI chat assistant">
-        {isOpen ? '✕' : '💬'}
+        {isOpen ? <XMarkIcon size={22} color="white" /> : <ChatBubbleIcon size={22} color="white" />}
       </button>
     </>
   );

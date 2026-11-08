@@ -2,6 +2,16 @@
 
 import { useState, useEffect, useCallback } from 'react';
 import Link from 'next/link';
+import {
+  BoneIcon,
+  ExclamationTriangleIcon,
+  CheckCircleIcon,
+  ChartBarIcon,
+  ArrowRightIcon,
+  StethoscopeIcon,
+  AcademicCapIcon,
+  ArrowsPointingOutIcon,
+} from '@/components/Icons';
 
 const GRADE_COLORS: Record<number, string> = {
   0: '#15803d', 1: '#ca8a04', 2: '#ea580c', 3: '#dc2626', 4: '#7f1d1d',
@@ -37,7 +47,7 @@ function themeClass(theme: SlideTheme): string {
 function Slide1() {
   return (
     <div className="slide-title-theme" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100%', textAlign: 'center', padding: '3rem 4rem' }}>
-      <div style={{ marginBottom: '1.5rem', fontSize: '4rem' }}>🦴</div>
+      <div style={{ marginBottom: '1.5rem' }}><BoneIcon size={64} color="white" /></div>
       <h1 style={{ fontSize: 'clamp(2rem,5vw,3.5rem)', fontWeight: 800, marginBottom: '1rem', color: 'white' }}>MedAdvise AI</h1>
       <div className="slide-subtitle" style={{ fontSize: '1.2rem', opacity: 0.85, maxWidth: 600, margin: '0 auto 2rem' }}>
         Automated Knee Osteoarthritis Grading Using Deep Learning
@@ -256,12 +266,12 @@ function Slide7() {
 // Slide 8: Training Strategy
 function Slide8() {
   const items = [
-    { icon: '🔀', title: 'Data Split', desc: 'Patient-level train/val/test split — zero data leakage between sets' },
-    { icon: '🔄', title: 'Augmentation', desc: 'Horizontal flip, rotation ±10°, brightness/contrast variation' },
-    { icon: '📉', title: 'Loss Function', desc: 'Categorical cross-entropy with class weights for imbalance' },
-    { icon: '⚙️', title: 'Optimizer', desc: 'Adam with cosine learning rate decay schedule' },
-    { icon: '🛑', title: 'Early Stopping', desc: 'Monitor validation QWK — stop when no improvement in 10 epochs' },
-    { icon: '🏆', title: 'Best Model', desc: 'Save checkpoint with highest validation QWK score' },
+    { icon: '⇌', title: 'Data Split', desc: 'Patient-level train/val/test split — zero data leakage between sets' },
+    { icon: '↻', title: 'Augmentation', desc: 'Horizontal flip, rotation ±10°, brightness/contrast variation' },
+    { icon: '↘', title: 'Loss Function', desc: 'Categorical cross-entropy with class weights for imbalance' },
+    { icon: '◎', title: 'Optimizer', desc: 'Adam with cosine learning rate decay schedule' },
+    { icon: '■', title: 'Early Stopping', desc: 'Monitor validation QWK — stop when no improvement in 10 epochs' },
+    { icon: '★', title: 'Best Model', desc: 'Save checkpoint with highest validation QWK score' },
   ];
   return (
     <div style={{ padding: '3rem 4rem', height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
@@ -360,21 +370,21 @@ function Slide10() {
         </div>
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
           <div style={{ background: '#fff7ed', border: '1px solid #fed7aa', borderRadius: 12, padding: '1.25rem' }}>
-            <div style={{ fontWeight: 700, color: '#9a3412', marginBottom: '0.5rem' }}>⚠️ Grade 1 Challenge</div>
+            <div style={{ fontWeight: 700, color: '#9a3412', marginBottom: '0.5rem', display: 'flex', alignItems: 'center', gap: '0.4rem' }}><ExclamationTriangleIcon size={16} color="#9a3412" /> Grade 1 Challenge</div>
             <div style={{ fontSize: '0.875rem', color: '#7c2d12', lineHeight: 1.6 }}>
               Grade 1 (Doubtful) has the lowest F1 score (0.392) due to high clinical ambiguity —
               borderline cases overlap significantly with both Grade 0 and Grade 2.
             </div>
           </div>
           <div style={{ background: '#f0fdf4', border: '1px solid #bbf7d0', borderRadius: 12, padding: '1.25rem' }}>
-            <div style={{ fontWeight: 700, color: '#15803d', marginBottom: '0.5rem' }}>✅ Grade 4 Strength</div>
+            <div style={{ fontWeight: 700, color: '#15803d', marginBottom: '0.5rem', display: 'flex', alignItems: 'center', gap: '0.4rem' }}><CheckCircleIcon size={16} color="#15803d" /> Grade 4 Strength</div>
             <div style={{ fontSize: '0.875rem', color: '#14532d', lineHeight: 1.6 }}>
               Severe OA (Grade 4) achieves the highest F1 (0.927) — distinctive radiographic features
               make it the easiest class to identify correctly.
             </div>
           </div>
           <div style={{ background: '#eff6ff', border: '1px solid #bfdbfe', borderRadius: 12, padding: '1.25rem' }}>
-            <div style={{ fontWeight: 700, color: '#1d4ed8', marginBottom: '0.5rem' }}>📊 Macro Average F1</div>
+            <div style={{ fontWeight: 700, color: '#1d4ed8', marginBottom: '0.5rem', display: 'flex', alignItems: 'center', gap: '0.4rem' }}><ChartBarIcon size={16} color="#1d4ed8" /> Macro Average F1</div>
             <div style={{ fontSize: '0.875rem', color: '#1e3a8a', lineHeight: 1.6 }}>
               Ensemble macro F1 = 0.690, weighted by class frequency. Binary OA detection F1 = 0.867.
             </div>
@@ -506,7 +516,7 @@ function Slide13() {
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '0.75rem' }}>
           {features.map((f) => (
             <div key={f} style={{ padding: '0.6rem 0.9rem', background: '#f8fafc', borderRadius: 8, border: '1px solid #e2e8f0', fontSize: '0.85rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-              <span style={{ color: '#0f766e', flexShrink: 0 }}>✓</span>
+              <CheckCircleIcon size={14} color="#0f766e" style={{ flexShrink: 0 }} />
               {f}
             </div>
           ))}
@@ -543,12 +553,12 @@ function Slide14() {
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2rem' }}>
         <div>
           <div style={{ fontWeight: 700, marginBottom: '0.75rem', color: '#b91c1c', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-            <span>⚠️</span> Current Limitations
+            <ExclamationTriangleIcon size={16} color="#b91c1c" /> Current Limitations
           </div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
             {limitations.map((l) => (
               <div key={l} style={{ display: 'flex', alignItems: 'flex-start', gap: '0.6rem', padding: '0.5rem 0.75rem', background: '#fef2f2', borderRadius: 8, fontSize: '0.875rem' }}>
-                <span style={{ color: '#b91c1c', flexShrink: 0 }}>✗</span>
+                <ExclamationTriangleIcon size={13} color="#b91c1c" style={{ flexShrink: 0, marginTop: '0.1rem' }} />
                 {l}
               </div>
             ))}
@@ -556,7 +566,7 @@ function Slide14() {
         </div>
         <div>
           <div style={{ fontWeight: 700, marginBottom: '0.75rem', color: '#15803d', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-            <span>🚀</span> Future Work
+            <ArrowRightIcon size={16} color="#15803d" /> Future Work
           </div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
             {future.map((f) => (
@@ -608,7 +618,7 @@ function Slide15() {
         </div>
       </div>
       <div style={{ textAlign: 'center', paddingTop: '0.5rem', borderTop: '1px solid rgba(255,255,255,0.2)' }}>
-        <div style={{ fontSize: '1.2rem', fontWeight: 800, marginBottom: '0.25rem' }}>🎓 Thank You</div>
+        <div style={{ fontSize: '1.2rem', fontWeight: 800, marginBottom: '0.25rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem' }}><AcademicCapIcon size={22} color="white" /> Thank You</div>
         <div style={{ fontSize: '0.85rem', opacity: 0.8 }}>MedAdvise AI · B.Sc. Thesis 2026 · Computer Science</div>
       </div>
     </div>
@@ -677,8 +687,8 @@ export default function PresentationPage() {
     <div className="slide-app">
       {/* Nav bar */}
       <div className="slide-nav">
-        <div className="slide-nav-title">
-          🩺 MedAdvise AI — Thesis Presentation
+        <div className="slide-nav-title" style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+          <StethoscopeIcon size={16} color="rgba(255,255,255,0.8)" /> MedAdvise AI — Thesis Presentation
         </div>
         <div className="slide-nav-controls">
           <button className="slide-nav-btn" onClick={() => navigate(current - 1)} disabled={current === 0}>
@@ -689,7 +699,7 @@ export default function PresentationPage() {
             Next →
           </button>
           <button className="slide-fullscreen-btn" onClick={toggleFullscreen} title="Toggle fullscreen">
-            ⛶
+            <ArrowsPointingOutIcon size={16} color="white" />
           </button>
           <Link href="/" style={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.8rem', marginLeft: '0.5rem' }}>
             ← Exit

@@ -1,5 +1,14 @@
 import Link from 'next/link';
 import StatusBadge from '@/components/StatusBadge';
+import {
+  BoneIcon,
+  BoltIcon,
+  CpuChipIcon,
+  ChartBarIcon,
+  AcademicCapIcon,
+  ExclamationTriangleIcon,
+  StethoscopeIcon,
+} from '@/components/Icons';
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:8000';
 
@@ -22,10 +31,10 @@ const KL_GRADES = [
 ];
 
 const FEATURES = [
-  { icon: '🦴', title: 'KL Grade Analysis', desc: 'Automated Kellgren-Lawrence grading (0–4) from knee X-ray images using MobileNetV2.' },
-  { icon: '⚡', title: 'Instant Results', desc: 'Get AI-powered severity classification in seconds with probability distributions.' },
-  { icon: '🤖', title: 'AI Medical Chat', desc: 'Ask follow-up questions powered by Google Gemini 1.5 Flash — free, fast, and contextual.' },
-  { icon: '📊', title: 'Research Grade', desc: 'QWK of 0.843 ensemble, 86.7% binary accuracy. Full model performance dashboard included.' },
+  { Icon: BoneIcon, title: 'KL Grade Analysis', desc: 'Automated Kellgren-Lawrence grading (0–4) from knee X-ray images using MobileNetV2.' },
+  { Icon: BoltIcon, title: 'Instant Results', desc: 'Get AI-powered severity classification in seconds with probability distributions.' },
+  { Icon: CpuChipIcon, title: 'AI Medical Chat', desc: 'Ask follow-up questions powered by Google Gemini 1.5 Flash — free, fast, and contextual.' },
+  { Icon: ChartBarIcon, title: 'Research Grade', desc: 'QWK of 0.843 ensemble, 86.7% binary accuracy. Full model performance dashboard included.' },
 ];
 
 const STEPS = [
@@ -112,7 +121,9 @@ export default async function Home() {
           <div className="landing-features">
             {FEATURES.map((f) => (
               <div key={f.title} className="landing-feature-card">
-                <div className="landing-feature-icon">{f.icon}</div>
+                <div className="landing-feature-icon">
+                  <f.Icon size={32} color="var(--color-primary)" />
+                </div>
                 <h3>{f.title}</h3>
                 <p>{f.desc}</p>
               </div>
@@ -183,7 +194,10 @@ export default async function Home() {
             </p>
           </div>
           <div className="landing-about-box">
-            <h3>🎓 Thesis Details</h3>
+            <h3 style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+              <AcademicCapIcon size={20} color="var(--color-primary)" />
+              Thesis Details
+            </h3>
             {[
               { label: 'Project', value: 'MedAdvise AI' },
               { label: 'Focus', value: 'Knee OA Severity Grading' },
@@ -191,7 +205,7 @@ export default async function Home() {
               { label: 'Dataset', value: 'OAI / Mendeley (Chen 2018)' },
               { label: 'Deployed Model', value: 'MobileNetV2 (9.6 MB)' },
               { label: 'Stack', value: 'Django REST + Next.js + TF' },
-              { label: 'Status', value: '⚠️ Research Prototype Only' },
+              { label: 'Status', value: 'Research Prototype Only' },
             ].map((r) => (
               <div key={r.label} className="landing-about-row">
                 <span style={{ fontWeight: 600, color: 'var(--color-text-muted)' }}>{r.label}</span>
@@ -217,7 +231,10 @@ export default async function Home() {
         <div className="landing-footer-inner">
           <div className="landing-footer-top">
             <div>
-              <div className="landing-footer-brand">🩺 MedAdvise AI</div>
+              <div className="landing-footer-brand" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                <StethoscopeIcon size={18} color="white" />
+                MedAdvise AI
+              </div>
               <div className="landing-footer-desc">
                 AI-powered knee osteoarthritis severity grading using the Kellgren-Lawrence scale.
                 Built as a thesis research project. Not for clinical use.
@@ -241,8 +258,9 @@ export default async function Home() {
           </div>
           <div className="landing-footer-bottom">
             <span>© 2026 MedAdvise AI — Thesis Research Project</span>
-            <span className="landing-footer-disclaimer">
-              ⚠️ Research prototype only. Not a medical device. Not validated for clinical use.
+            <span className="landing-footer-disclaimer" style={{ display: 'flex', alignItems: 'flex-start', gap: '0.4rem' }}>
+              <ExclamationTriangleIcon size={14} color="#64748b" style={{ flexShrink: 0, marginTop: '0.1rem' }} />
+              Research prototype only. Not a medical device. Not validated for clinical use.
               All results should be confirmed by a qualified orthopedic specialist.
             </span>
           </div>
