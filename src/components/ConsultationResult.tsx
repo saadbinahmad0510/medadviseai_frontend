@@ -8,13 +8,29 @@ import {
 import GradeBadge from './GradeBadge';
 import ProbabilityBars from './ProbabilityBars';
 
-export default function ConsultationResult({ consultation }: { consultation: Consultation }) {
+interface ConsultationResultProps {
+  consultation: Consultation;
+  onInfoClick?: () => void;
+}
+
+export default function ConsultationResult({ consultation, onInfoClick }: ConsultationResultProps) {
   const { image, grade, confidence, expected_grade, probabilities, ai_response } = consultation;
   const imageUrl = resolveImageUrl(image);
   const failed = image !== null && grade === null;
 
   return (
     <div className="result-card">
+      {onInfoClick && grade !== null && (
+        <button
+          className="info-icon-btn"
+          onClick={onInfoClick}
+          aria-label="View detailed analysis"
+          title="View detailed analysis, probability charts, and clinical information"
+        >
+          ⓘ
+        </button>
+      )}
+
       {imageUrl && (
         // eslint-disable-next-line @next/next/no-img-element
         <img src={imageUrl} alt="Uploaded X-ray" className="result-xray" />
@@ -58,7 +74,12 @@ export default function ConsultationResult({ consultation }: { consultation: Con
       )}
 
       <p className="result-disclaimer">
-        Research prototype. Not a medical device. Not for clinical decisions.
+        Research prototype. Not a medical device. Not for clinical decisions.{' '}
+        {grade !== null && onInfoClick && (
+          <button onClick={onInfoClick} style={{ background: 'none', border: 'none', color: 'var(--color-primary)', cursor: 'pointer', fontSize: 'inherit', textDecoration: 'underline', padding: 0 }}>
+            Click ⓘ for detailed analysis
+          </button>
+        )}
       </p>
     </div>
   );
